@@ -88,7 +88,7 @@
 ;; main interface
 
 ;;;###autoload
-(defmacro elisp-koans/deftest (name args &rest form)
+(defmacro elisp-koans-deftest (name args &rest form)
   "Define a test called NAME accepting ARGS with a body of FORM.
 
 This wraps `ert-deftest' with a check for blanks."

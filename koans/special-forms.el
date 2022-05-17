@@ -33,12 +33,12 @@
  "`setf' is used to assign values to symbols. These symbols may refer to
 variables with lexical or dynamic scope."
   (setf elisp-koans-my-name "David")
-  (should (equal ___ elisp-koans-my-name))
+  (should (equal "David" elisp-koans-my-name))
   (setf elisp-koans-my-clones-name elisp-koans-my-name)
-  (should (equal ___ "David"))
+  (should (equal elisp-koans-my-clones-name "David"))
   (setf elisp-koans-a 5)
   (setf elisp-koans-b 10)
-  (setf elisp-koans-c ___)
+  (setf elisp-koans-c (* elisp-koans-a elisp-koans-b))
   (should (equal 50 elisp-koans-c)))
 
 ;; Relevant emacs info page: `(info "(elisp)Local Variables")'
@@ -51,21 +51,21 @@ over the extent of the lexical form. After which, the previous
 value, if it exists, is visible again."
   (setf elisp-koans-a 10)
   (setf elisp-koans-b 20)
-  (should (equal elisp-koans-a ___))
-  (should (equal elisp-koans-b ___))
+  (should (equal elisp-koans-a 10))
+  (should (equal elisp-koans-b 20))
   (let ((elisp-koans-a 1111)
         (elisp-koans-b 2222))
-    (should (equal elisp-koans-a ___))
-    (should (equal elisp-koans-b ___)))
-  (should (equal elisp-koans-a ___))
-  (should (equal elisp-koans-b ___)))
+    (should (equal elisp-koans-a 1111))
+    (should (equal elisp-koans-b 2222)))
+  (should (equal elisp-koans-a 10))
+  (should (equal elisp-koans-b 20)))
 
 
 (elisp-koans/deftest
  elisp-koans/special-forms-let-default-value ()
  "`let' vars are bound to a default value."
  (let ((x))
-   (should (equal ___ x))))
+   (should (equal '() x))))
 
 
 (elisp-koans/deftest
@@ -75,7 +75,7 @@ on earlier ones."
  (setf elisp-koans-a 100)
  (let ((elisp-koans-a 5)
        (elisp-koans-b (* 10 elisp-koans-a)))
-   (should (equal elisp-koans-b ___))))
+   (should (equal elisp-koans-b 1000))))
 
 
 (elisp-koans/deftest
@@ -84,8 +84,8 @@ on earlier ones."
  (setf a 100)
  (let* ((a 5)
         (b (* 10 a)))
-   (should (equal b ___)))
- (should (equal a ___)))
+   (should (equal b 50)))
+ (should (equal a 100)))
 
 
 (elisp-koans/deftest
@@ -94,13 +94,15 @@ on earlier ones."
  (setf elisp-koans-a 100)
  (setf elisp-koans-b 23)
  (setf elisp-koans-c 456)
- (let ((elisp-koans-a ___)
-       (elisp-koans-b ___)
-       (elisp-koans-c ___))
+ (let ((elisp-koans-a 100)
+       (elisp-koans-b 200)
+       (elisp-koans-c "Jellyfishh"))
    (should (eq elisp-koans-a 100))
    (should (eq elisp-koans-b 200))
    (should (equal elisp-koans-c "Jellyfish")))
- (let* ((elisp-koans-a ___)
+ (let* ((elisp-koans-a 121)
+        (elisp-koans-b 200)
+        (elisp-koans-c (+ elisp-koans-a (/ elisp-koans-b elisp-koans-a)))
         ;; add more bindings here
         )
    (should (eq elisp-koans-a 121))
