@@ -96,7 +96,7 @@ on earlier ones."
  (setf elisp-koans-c 456)
  (let ((elisp-koans-a 100)
        (elisp-koans-b 200)
-       (elisp-koans-c "Jellyfishh"))
+       (elisp-koans-c "Jellyfish"))
    (should (eq elisp-koans-a 100))
    (should (eq elisp-koans-b 200))
    (should (equal elisp-koans-c "Jellyfish")))
@@ -124,20 +124,24 @@ match is found"
          (5 :five)
          ;; t specifies default behavior
          (t :unknown)))
- (should (equal ___ elisp-koans-b))
+ (should (equal :four elisp-koans-b))
  "case can also check if a list of values contains
    the input"
  (setf elisp-koans-c
        (case elisp-koans-a
          (5 :five)
          ((3 4) :three-or-four)))
- (should (equal ___ elisp-koans-c)))
+ (should (equal :three-or-four elisp-koans-c)))
 
 
 (defun elisp-koans/cartoon-dads (input)
   "you should be able to complete this case statement"
   (case input
     (:this-one-doesnt-happen :fancy-cat)
+    (:bart :homer)
+    (:stewie :peter)
+    (:stan :randy)
+    (:space-ghost :unknown)
     (t :unknown)))
 
 (elisp-koans/deftest
@@ -158,7 +162,7 @@ the implications of this in the equality-distinctions lesson"
                     ("John" "Doe")
                     ("Max" "Mustermann")
                     (t "Anonymous"))))
-   (should (equal ___ lastname))))
+   (should (equal "Anonymous" lastname))))
 
 (elisp-koans/deftest
  elisp-koans/special-forms-cond ()
@@ -168,6 +172,6 @@ conditions, until a condition is met"
         (c (cond ((> a 0) :positive)
                  ((< a 0) :negative)
                  (t :zero))))
-   (should (equal ___ c))))
+   (should (equal :positive c))))
 
 ;;; special-forms.el ends here
