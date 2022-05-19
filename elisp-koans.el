@@ -98,6 +98,17 @@ This wraps `ert-deftest' with a check for blanks."
         '(should-not "Fill in the blank to expand your awareness.")
         form)))
 
+;;;###autoload
+(defmacro elisp-koans/deftest (name args &rest form)
+  "Define a test called NAME accepting ARGS with a body of FORM.
+
+This wraps `ert-deftest' with a check for blanks."
+  `(ert-deftest ,name ,args
+     ,@(elisp-koans//replace
+        #'elisp-koans//is-blank
+        '(should-not "Fill in the blank to expand your awareness.")
+        form)))
+
 
 ;;;###autoload
 (defun elisp-koans/load-groups (&optional koans)
