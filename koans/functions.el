@@ -25,7 +25,7 @@
 (elisp-koans/deftest
  elisp-koans/functions-call ()
  "`defun' defines global functions"
- (should (eq ___ (elisp-koans/add 7 11))))
+ (should (eq 18 (elisp-koans/add 7 11))))
 
 
 (elisp-koans/deftest
@@ -36,8 +36,8 @@ with `cl-labels' may refer to themselves, whereas local functions
 defined with `cl-flet' may not."
  (cl-flet ((elisp-koans/add (a b) (* a b)))
    "`cl-flet' binds a function to a name within a lexical environment"
-   (should (equal ___ (elisp-koans/add 7 11))))
- (should (equal ___ (elisp-koans/add 7 11))))
+   (should (equal 77 (elisp-koans/add 7 11))))
+ (should (equal 18 (elisp-koans/add 7 11))))
 
 
 ;; borrowed from Common Lisp The Language chapter 5.2.2
@@ -48,9 +48,9 @@ defined with `cl-flet' may not."
 (elisp-koans/deftest
  elisp-koans/functions-optional-parameters ()
  "Optional parameters are filled in with their default value."
- (should (equal ___ (elisp-koans/func-with-opt-params :test-1 :test-2)))
- (should (equal ___ (elisp-koans/func-with-opt-params :test-1)))
- (should (equal ___ (elisp-koans/func-with-opt-params))))
+ (should (equal '(:test-1 :test-2) (elisp-koans/func-with-opt-params :test-1 :test-2)))
+ (should (equal '(:test-1 3) (elisp-koans/func-with-opt-params :test-1)))
+ (should (equal '(2 3) (elisp-koans/func-with-opt-params))))
 
 
 (cl-defun elisp-koans/func-with-opt-params-and-indication (&optional (a 2 a?) (b 3 b?))
@@ -148,7 +148,7 @@ parameters"
  (let (f1 f2 f3)
    (setq f1 '+)
    (setq f2 '-)
-   (setq f3 'max)
+
 
    (should (equal ___ (apply f1 '(1 2))))
    (should (equal ___ (apply f2 '(1 2))))
