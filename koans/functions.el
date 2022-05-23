@@ -61,9 +61,9 @@ defined with `cl-flet' may not."
  "Common Lisp optional params may bind a symbol which indicate
 whether the value was provided or defaulted. Each optional
 parameter binding has the form (var default-form supplied-p)."
-   (should (equal ___ (elisp-koans/func-with-opt-params-and-indication :test-1 :test-2)))
-   (should (equal ___ (elisp-koans/func-with-opt-params-and-indication :test-1)))
-   (should (equal ___ (elisp-koans/func-with-opt-params-and-indication))))
+   (should (equal '(:test-1 t :test-2 t) (elisp-koans/func-with-opt-params-and-indication :test-1 :test-2)))
+   (should (equal '(:test-1 t 3 nil) (elisp-koans/func-with-opt-params-and-indication :test-1)))
+   (should (equal '(2 nil 3 nil) (elisp-koans/func-with-opt-params-and-indication))))
 
 
 (defun elisp-koans/func-with-rest-params (&rest x)
@@ -73,9 +73,9 @@ parameter binding has the form (var default-form supplied-p)."
  elisp-koans/functions-with-rest-params ()
  "With &rest, the remaining params, are handed in as a list.  Remaining
 arguments (possibly none) are collected into a list."
- (should (equal ___ (elisp-koans/func-with-rest-params)))
- (should (equal ___ (elisp-koans/func-with-rest-params 1)))
- (should (equal ___ (elisp-koans/func-with-rest-params 1 :two 333))))
+ (should (equal '() (elisp-koans/func-with-rest-params)))
+ (should (equal '(1) (elisp-koans/func-with-rest-params 1)))
+ (should (equal '(1 :two 333) (elisp-koans/func-with-rest-params 1 :two 333))))
 
 
 (cl-defun elisp-koans/cl-defun-with-key-params (&key a b)
@@ -85,12 +85,12 @@ arguments (possibly none) are collected into a list."
 (elisp-koans/deftest
  elisp-koans/functions-key-params ()
  "Key params allow the user to specify params in any order."
- (should (equal ___ (elisp-koans/cl-defun-with-key-params)))
- (should (equal ___ (elisp-koans/cl-defun-with-key-params :a 11 :b 22)))
+ (should (equal '(nil nil) (elisp-koans/cl-defun-with-key-params)))
+ (should (equal '(11 22) (elisp-koans/cl-defun-with-key-params :a 11 :b 22)))
  ;; it is not necessary to specify all key parameters
- (should (equal ___ (elisp-koans/cl-defun-with-key-params :b 22)))
+ (should (equal '(nil 22) (elisp-koans/cl-defun-with-key-params :b 22)))
  ;; order is not important
- (should (equal ___ (elisp-koans/cl-defun-with-key-params :b 22 :a 0))))
+ (should (equal '(0 22) (elisp-koans/cl-defun-with-key-params :b 22 :a 0))))
 
 
 (cl-defun elisp-koans/cl-defun-key-params-can-have-defaults (&key (a 3) (b 4))
