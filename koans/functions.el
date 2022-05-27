@@ -100,12 +100,12 @@ arguments (possibly none) are collected into a list."
 (elisp-koans/deftest
  elisp-koans/functions-key-params-can-have-defaults ()
  "key parameters can have defaults also"
- (should (equal ___ (elisp-koans/cl-defun-key-params-can-have-defaults)))
- (should (equal ___ (elisp-koans/cl-defun-key-params-can-have-defaults :a 3 :b 4)))
- (should (equal ___ (elisp-koans/cl-defun-key-params-can-have-defaults :a 11 :b 22)))
- (should (equal ___ (elisp-koans/cl-defun-key-params-can-have-defaults :b 22)))
+ (should (equal '(3 4) (elisp-koans/cl-defun-key-params-can-have-defaults)))
+ (should (equal '(3 4) (elisp-koans/cl-defun-key-params-can-have-defaults :a 3 :b 4)))
+ (should (equal '(11 22) (elisp-koans/cl-defun-key-params-can-have-defaults :a 11 :b 22)))
+ (should (equal '(3  22) (elisp-koans/cl-defun-key-params-can-have-defaults :b 22)))
  ;; order is not important
- (should (equal ___ (elisp-koans/cl-defun-key-params-can-have-defaults :b 22 :a 0))))
+ (should (equal '(0 22) (elisp-koans/cl-defun-key-params-can-have-defaults :b 22 :a 0))))
 
 
 ;; borrowed from common lisp the language 5.2.2
@@ -115,7 +115,7 @@ arguments (possibly none) are collected into a list."
 (elisp-koans/deftest
  elisp-koans/functions-many-kinds-params ()
  "CL (and elisp!) provides the programmer with more than enough rope to hang themself."
- (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1)))
+ (should (equal '(nil nil nil 1) (elisp-koans/cl-defun-with-funky-parameters 1)))
  (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1 :b 2)))
  (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1 :b 2 :c 3)))
  (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1 :c 3 :b 2))))
