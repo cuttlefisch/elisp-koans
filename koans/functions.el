@@ -115,7 +115,7 @@ arguments (possibly none) are collected into a list."
 (elisp-koans/deftest
  elisp-koans/functions-many-kinds-params ()
  "CL (and elisp!) provides the programmer with more than enough rope to hang themself."
- (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1)))
+ (should (equal '(nil nil nil 1) (elisp-koans/cl-defun-with-funky-parameters 1)))
  (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1 :b 2)))
  (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1 :b 2 :c 3)))
  (should (equal ___ (elisp-koans/cl-defun-with-funky-parameters 1 :c 3 :b 2))))
